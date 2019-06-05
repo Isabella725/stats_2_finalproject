@@ -14,21 +14,23 @@ pagenumber: 1
 bibliography: ../project.bib
 biblio-style: ./resources/ajs.bst
 title: "The Title"
-author:
+author:Isabella Clark
 - affiliation: University of Oregon, Sociology
-  name: Aaron Gullickson
-- affiliation: Some Research University
-  name: My co-author
-keywords: keywords
-thanks: Thanks to people and stuff
+  name: 
+keywords: climate change, fertility rates, family planning, environment
+thanks: Thanks to 
 abstract: This is a test abstract
 ---
 
 # Introduction
+My paper seeks to understand if there is an emergent trend in increasing concerns about climate change and declining fertility rates. Specifically, I am interested in the possible intersection between the well-documented lowering of birth rates in affluent nations and growing awareness and concern over anthropogenic climate change. For this study, I will focus on the United States, an affluent country in which there has been political denialism around climate change, although a large majority of Americans now believe climate change is happening (Leiserowitz et al 2018). This project analyzes whether American women who do believe in anthropogenic climate change are reducing the number of children they have in response. I will contrast their feritlity rates with those of American women who show no belief in or concern about climate change. 
 
-# Background
+This projet relies upon important findings within the family planning literature to create appropriate control variables. Family planning is well documented in the literature as a highly classed experience. Women with a lowered class status are found to have less interest in controlling their fertility rates than women with a middle class status (cite). This reflects the literature on future planning more broadly, where a difference has been found between middle and working class people in their belief in the importance of planning for the future (cite). There also may be strong class differences in education around climate change. Given these findings, I will be using class as a control variable in my analysis.  
 
 # Data and Methods
+The dataset I used in this project is the ANES 2016 Time Series Study. (explain number of respondents? survey methods?) ANES is the most suitable dataset I have found at this time to answer this research question. Overall, there is a shockingly limited number of publicily available datasets dealing with respondents' attitudes and beliefs about climate change, or the environment more broadly. Even datasets which focus on voter opinions of public policy seem to shy away from questions regarding environmental policies, despite the environment's material basis for our continued existence.
+
+I wanted data that dealt both with the question of anthropogenically caused climate change and included respondents' demographic information. Since this 2016 ANES Time Series Study includes questions on both concepts, it was an appropriate choice for this research question. I also needed information on fertility rates. The ANES 2016 Time Series Study included questions on the number of children living in each respondents' household which I operationalized as a measure of fertility. Although this is an imperfect metric, no other dataset contained variables on respondents' climate change beliefs, demographics, and fertility rates. 
 
 # Results
 
