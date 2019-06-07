@@ -1,4 +1,3 @@
 # Input Directory
 
-
-I am using data from American National Election Studies. I am using the 2016 Time Series Study located here: https://electionstudies.org/project/2016-time-series-study/. This study used two waves of interviews, pre and post election in 2016. (*I still need to identify which wave I am using, or if I am using both in my analysis). Both face-to-face and internet interviews were used to collect the data.
+I am using the 2016 Time Series Study from American National Election Studies located here: https://electionstudies.org/project/2016-time-series-study/. This study used two waves of interviews, pre and post election in 2016. Both face-to-face and internet interviews were used to collect the data. The ANES writes, "The data can be analyzed using the combined dual-mode sample, or using the face-to-face sample alone, or using the Internet sample alone." My study will only use the face-to-face sample as it includes unique information on respondents' household demographics regarding children. Variables on climate change belief come only from the pre-election wave of interviews. 
