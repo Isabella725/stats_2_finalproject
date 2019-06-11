@@ -29,6 +29,12 @@ anes$children <- factor(ifelse(anes$V165506<0, NA,
                                 levels=c(2,1),
                                 labels=c("No","Yes"))
 table(anes$V165506, anes$children, exclude=NULL)
+anes$gender <- factor(ifelse(anes$V161342<0, NA,
+                             anes$V161342),
+                              levels=c(3,2,1),
+                              labels=c("Other","Female","Male"))
+table(anes$gender, exclude=NULL)
+
 
 #source in any useful functions
 source("useful_functions.R")
@@ -44,5 +50,6 @@ source("useful_functions.R")
 #In order to preserve formatting, it is easiest to save your final analytical dataset as an RData file with the save command:
 
 anes <- subset(anes,
-               select=c("climatebelief"))
+               select=c("climatebelief", "anthro", "children", "gender"))
   save(anes, file="analysis/output/analytical_data.RData")
+  
