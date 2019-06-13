@@ -7,11 +7,22 @@
 # the analytical dataset, and then write the analytical data to the output directory. 
 
 library(haven)
-anes <- read_dta("analysis/input/anes_timeseries_2016_dta/anes_timeseries_2016.dta")
-View(anes)
+anes <- read_dta("input/anes_timeseries_2016_dta/anes_timeseries_2016.dta")
+
+#subset out web observations
+anes <- subset(anes, V160501==1)
+
 
 #rename variables 
-anes <- subset(anes, V160501==1)
+#Convert numeric codes for categorical variables into proper factor variables
+
+table(anes$V165516)
+
+anes$age <- factor(ifelse(anes$V165516<0 | anes$V165516 ==3, NA,
+                           anes$V165516),
+                           levels=c(1,2),
+                           labels=c("18-39","40-59"))
+table(anes$age)
 
 anes$climatebelief <- factor(ifelse(anes$V161221<0, NA, 
                                             anes$V161221),
@@ -29,18 +40,13 @@ anes$children <- factor(ifelse(anes$V165506<0, NA,
                                 levels=c(2,1),
                                 labels=c("No","Yes"))
 table(anes$V165506, anes$children, exclude=NULL)
-anes$gender <- factor(ifelse(anes$V161342<0, NA,
+anes$gender <- factor(ifelse(anes$V161342<0 | anes$V161342==3, NA,
                              anes$V161342),
-                              levels=c(3,2,1),
-                              labels=c("Other","Female","Male"))
+                              levels=c(2,1),
+                              labels=c("Female","Male"))
 table(anes$gender, exclude=NULL)
 
 
-#source in any useful functions
-source("useful_functions.R")
-
-
-#Convert numeric codes for categorical variables into proper factor variables
 #Replace numeric codes for missing values with NA values
 #Collapse categories in categorical variables into smaller sets.
 
@@ -50,6 +56,6 @@ source("useful_functions.R")
 #In order to preserve formatting, it is easiest to save your final analytical dataset as an RData file with the save command:
 
 anes <- subset(anes,
-               select=c("climatebelief", "anthro", "children", "gender"))
-  save(anes, file="analysis/output/analytical_data.RData")
+               select=c("age","climatebelief","anthro","children","gender"))
+  save(anes, file="output/analytical_data.RData")
   
