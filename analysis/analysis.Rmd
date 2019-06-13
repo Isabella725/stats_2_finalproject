@@ -24,34 +24,48 @@ Use this R Markdown to perform the main analysis for the project. I use this bas
 #making pretty pictures
 
 ```{r figure_example, echo=FALSE, fig.cap="figures I might use"}
-ggplot(anes, aes(x=climatebelief, y=children))+
-geom_boxplot(fill="grey", outlier.color = "red")+
-labs(y="children under 18",
-title="Boxplot of children by belief in climate change")+
+
+ggplot(anes, aes(x=climatebelief, y=..prop.., group=1))+
+geom_bar()+
+scale_y_continuous(labels=scales::percent)+
+labs(x="Beliefs", y=NULL,
+title="Distribution of climate change believers")+
 theme_bw()
+
+#or use prop.table 
+tab<-table(anes$climatebelief, anes$children)
+tab
 
 
 ```
 
-This first boxplot does not seem to produce anything useful whatsoever. A coding error? A data issue? I am still struggling to think through how to visualize my data since it is all categorical and none of it is continuous. 
-Realizing I need to be looking at the more recent slides online ...reading chapter 3 models for binary variables. My dependent variable is IF children under 18 are in the household not how many, therefore my dependent variable is a binary outcome of yes or no. According to the slides "We need generalized linear models and maximum likelihood estimation."
 
 #initial models
 
 ```{r models, results="asis", echo=FALSE, error=FALSE, message=FALSE}
-model1<- lm(children~climatebelief, data=anes)
-model1
-
 #tried using a glm 
 
-model.glm <- glm((children=="Has Children")~climatebelief, data=anes,
+model.glm <- glm(children~climatebelief, data=anes,
 family=binomial(logit))
 summary(model.glm)$coef
 model.glm
 
+#added in controls
+model.age<- glm(children~age,data = anes, family=binomial(logit))
+model.age
+model.both <-glm(children~climatebelief + age, data=anes, family=binomial(logit))
+model.both
+```
 # I don't quite get what these results tell me, should I use a relevel command to look at climatechangeNO belief versus yes? 
 anes$climatebelief<- relevel(anes$climatebelief, "No")
 model.climate <-glm(children~climatebelief, data=anes,family=binomial(logit))
 model.climate
 ```
 I have no idea what these models are telling me, I regret using binary, categorical data. 
+Aaron's explanation via github:
+
+The regression slopes are the log odds ratios of having children in the household. So if the number for a "climate change believer", for example, was -0.075, climate changing believers are about 7% less likely (exp(-.075)=-0.93)) to have children in the household than climate change non-believers, controlling for whatever else is in the model.
+
+Since all of you independent variables are binary, then its a straighforward to convert to odds ratios that basically just like the cross-products we did way back in the first term when we looked at two-way tables - with the added benefit of being able to control for stuff.
+
+

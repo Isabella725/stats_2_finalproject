@@ -27,7 +27,7 @@ table(anes$age)
 anes$climatebelief <- factor(ifelse(anes$V161221<0, NA, 
                                             anes$V161221),
                                              levels=c(2,1),
-                                             labels=c("No","Yes"))
+                                             labels=c("Doesn't Believe","Believes"))
 table(anes$V161221, anes$climatebelief, exclude=NULL)
 
 anes$anthro <- factor(ifelse(anes$V161222<0, NA, 
