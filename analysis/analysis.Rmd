@@ -10,8 +10,10 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-source("useful_functions.R")
+load("output/analytical_data.RData")
 library(texreg)
+library(ggplot2)
+library(scales)
 ```
 
 # Introduction
@@ -19,8 +21,26 @@ library(texreg)
 
 Use this R Markdown to perform the main analysis for the project. I use this basically as a lab notebook. It contains the main analysis and a variety of sensitivity analysis. The code in this documents serves as a baseline for the eventual tables and figures that will go into the paper. At the same time it will serve as a record of all supplementary analyses performed. 
 
+#making pretty pictures
+
+```{r figure_example, echo=FALSE, fig.cap="figures I might use"}
+ggplot(anes, aes(x=climatebelief, y=children))+
+geom_boxplot(fill="grey", outlier.color = "red")+
+labs(y="children under 18",
+title="Boxplot of children by belief in climate change")+
+theme_bw()
+
+
+```
+
+This first boxplot does not seem to produce anything useful whatsoever. A coding error? A data issue? I am still struggling to think through how to visualize my data since it is all categorical and none of it continuous. 
+Realizing I need to be looking at the more recent slides online ...reading chapter 3 models for binary variables. My dependent variable is IF children under 18 are in the household not how many, therefore my dependent variable is a binary outcome. 
+
 #initial models
 
+```{r models, results="asis", echo=FALSE, error=FALSE, message=FALSE}
+model1<- (children~climatebelief, data=anes)
+model1
 
 
-
+```
