@@ -57,29 +57,23 @@ tab
 
 model.glm <- glm(children~climatebelief, data=anes,
 family=binomial(logit))
-summary(model.glm)$coef
-model.glm
 
 #added in controls
-model.age<- glm(children~age,data = anes, family=binomial(logit))
-model.age
-model.both <-glm(children~climatebelief + age, data=anes, family=binomial(logit))
-model.both
+model.gender<- glm(children~gender,data = anes, family=binomial(logit))
+model.both <-glm(children~climatebelief + gender, data=anes, family=binomial(logit))
 
-texreg(list(model.glm,model.age,model.both),
-          caption="Test Models",
-          custom.coef.names = "Intercept","Climate Belief","Age")
+screenreg(list(model.glm, model.gender, model.both))
 ```
-# I don't quite get what these results tell me, should I use a relevel command to look at climatechangeNO belief versus yes? 
-anes$climatebelief<- relevel(anes$climatebelief, "No")
-model.climate <-glm(children~climatebelief, data=anes,family=binomial(logit))
-model.climate
-```
+
 I have no idea what these models are telling me, I regret using binary, categorical data. 
 Aaron's explanation via github:
 
 The regression slopes are the log odds ratios of having children in the household. So if the number for a "climate change believer", for example, was -0.075, climate changing believers are about 7% less likely (exp(-.075)=-0.93)) to have children in the household than climate change non-believers, controlling for whatever else is in the model.
 
 Since all of you independent variables are binary, then its a straighforward to convert to odds ratios that basically just like the cross-products we did way back in the first term when we looked at two-way tables - with the added benefit of being able to control for stuff.
+
+Further notes: I can't for the life of me get my models to appear in a table. 
+
+
 
 
