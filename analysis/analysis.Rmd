@@ -1,7 +1,10 @@
 ---
 title: "Analysis for Project"
-output: 
-  html_document: 
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '4'
+  html_document:
     fig_height: 6
     fig_width: 9
     toc: yes
@@ -32,6 +35,13 @@ labs(x="Beliefs", y=NULL,
 title="Distribution of climate change believers")+
 theme_bw()
 
+ggplot(anes, aes(x=anthro, y=..prop.., group=1))+
+geom_bar()+
+scale_y_continuous(labels=scales::percent)+
+labs(x="Causes of Climate Change", y=NULL,
+title="Distribution of climate change causes")+
+theme_bw()
+
 #or use prop.table 
 tab<-table(anes$climatebelief, anes$children)
 tab
@@ -55,6 +65,10 @@ model.age<- glm(children~age,data = anes, family=binomial(logit))
 model.age
 model.both <-glm(children~climatebelief + age, data=anes, family=binomial(logit))
 model.both
+
+texreg(list(model.glm,model.age,model.both),
+          caption="Test Models",
+          custom.coef.names = "Intercept","Climate Belief","Age")
 ```
 # I don't quite get what these results tell me, should I use a relevel command to look at climatechangeNO belief versus yes? 
 anes$climatebelief<- relevel(anes$climatebelief, "No")
