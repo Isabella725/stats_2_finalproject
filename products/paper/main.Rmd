@@ -1,25 +1,15 @@
 ---
-output:
-  pdf_document:
-    citation_package: natbib
-    fig_caption: yes
-    template: ./resources/aog-latex-ms.tex
-  word_document:
-    reference_docx: ./resources/aog_word_style.docx
-fontfamily: mathpazo
-fontsize: 11pt
-anonymous: false
-endnotes: false
-pagenumber: 1
-bibliography: ../project.bib
-biblio-style: ./resources/ajs.bst
 title: "Fertility Effects of a Belief in Climate Change"
 author: Isabella Clark
-- affiliation: University of Oregon, Sociology
-  name: 
-keywords: climate change, fertility rates, family planning, environmental sociology
-thanks: Thanks to Aaron Gulllickson for all the R assists. 
-abstract: This is a test abstract
+output:
+  pdf_document:
+    toc: yes
+    toc_depth: '4'
+  html_document:
+    fig_height: 6
+    fig_width: 9
+    toc: yes
+    toc_depth: 4
 ---
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
@@ -38,7 +28,7 @@ The dataset I used in this project is the ANES 2016 Time Series Study. ANES is t
 
 The ANES 2016 Time Series Study was conducted in two waves, pre-and post-election. Both web interviews and face-to-face interviews were used to gather data. The ANES website states, "The data can be analyzed using the combined dual-mode sample, or using the face-to-face sample alone, or using the Internet sample alone." I subset the data for the face-to-face sample and only analyzed this sample as it included unique information on respondents' household demographics regarding children. Variables on climate change belief came only from the pre-election wave of interviews. 
 
-As control variables, I planned to use age and gender. Age as a variable is problematic in this dataset. First, the categories for age are very large, under 18, 18-39, 40-59 and 60+, making it difficult to look at variation between age categories and climate beliefs and fertility. Additionally, many respondents chose not to answer, resulting in a great deal of missing variables which shrunk my dataset in analysis between models. 
+As control variables, I planned to use age and gender. Age as a variable is problematic in this dataset. First, the categories for age are very large: under 18, 18-39, 40-59 and 60+, making it difficult to look at variation between age categories and climate beliefs and fertility. Additionally, many respondents chose not to answer, resulting in a great deal of missing variables which shrunk my dataset in analysis between models. 
 
 Additionally, I had initially planned to focuse on class as a control variable and that directly relates to literature on family planning. I was going to use education as well as income as rough measures of SES. The limitation here is that income is a restricted variable in the dataset. Though a few respondents chose to include this data publicly, it was too small of a number to be statistically significant. Education was also a problem. Interviewers asked respondents to choose from three categories: less than high school, high school, and more than high school. Obviously the category "more than high school" contains a great deal of hidden information. Someone who has completed some community college classes has indeed obtained "more than a high school" education, yet would not likely be at the same SES as someone who completed either a bachelors degree or a graduate level education. Clearly, this dataset has proved to contain many limitations for adequately studying demographics of respondents which may effect both their climate change beliefs and their choices to have children. To look at the climate change variable further, I also included information about whether climate change was seen as anthropogenically caused, the result of natural processes, or equally caused by each. 
 
@@ -65,7 +55,7 @@ model1<- glm(children~climatebelief, data=anes, family=binomial)
 model2<-glm(children~climatebelief+anthro, data=anes, family = binomial)
 model3<-glm(children~climatebelief+anthro+gender, data=anes, family = binomial)
 
-texreg(list(model1,model2,model3),
+texreg(list(model1,model2,model3,),
           caption="Models",
        custom.coef.names = c("Intercept","Climate Change Belief(yes)","Natural Causes", "Equal Causes","Male"))
 
@@ -73,8 +63,10 @@ texreg(list(model1,model2,model3),
 # Results
 An encouraging result from my project is that most respondents overall do believe in climate change. However, a greater proportion of respondents think climate change is equally due to human and natural causes, rather than being all anthropogenically caused. This is troublesome because it may encourage respondents to defer responsibility from both themselves and the government to address climate change. 
 
+Climate change beliefs do not seem to significantly effect who has children living in their household. In fact, respondents who do believe in climate change show a slightly higher likelihood (5% probability odds) of having children in their household before control variables are used. After including a control variable on the causes of climate change, results do shiftly slightly. Respondents who believe in natural causes actually are 32 percent less likely to have children in their households. These odds are not statistically significant however. The most statistically significant variable here is gender. Male respondents are 29 percent less likely to have children their household, all other variables being controlled for. However, I highly suspect this has to do with custody arrangements and the preponderance of single mothers versus single fathers. 
+
 # Conclusions
-This topic is ripe for study. However, without a different dataset, or at least an unrestricted version of this dataset, there is no way to satisfactorily answer the research question. The results in this paper would indicate that climate change beliefs do not have a negative impact on fertility rates. However, without a better dependent variable, I am skeptical of the results found. Knowing women's actually ferility rates is key to understanding this research question.
+This topic is ripe for study. However, without a different dataset, or at least an unrestricted version of this dataset, there is no way to satisfactorily answer the research question. The results in this paper would indicate that climate change beliefs do not have a negative impact on fertility rates. However, without a better dependent variable, I am skeptical of the results found. Knowing women's actually ferility rates is ultimately the key to understanding this research question.
 
 # References
 Leiserowitz, A., Maibach, E., Roser-Renouf, C., Rosenthal, S., Cutler, M., & Kotcher, J. (2018). Climate change in the American mind: March 2018. Yale University and George Mason University. New Haven, CT: Yale Program on Climate Change Communication.
